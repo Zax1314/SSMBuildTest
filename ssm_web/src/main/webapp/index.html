@@ -1,0 +1,64 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<meta charset="UTF-8">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<body>
+<form action="http://121.36.209.202:8080/ssm_web-1.0/insert_post" METHOD="get">
+    <div >
+        <input type="text" id="pic" name="pic">
+        <p>图片地址</p>
+    </div>
+    <div >
+        <input type="text" id="uname" name="uname">
+        <p>用户名</p>
+    </div>
+    <div >
+        <input type="text" id="ptitle" name="ptitle">
+        <p>标题</p>
+    </div>
+    <div>
+        <textarea type="text" id="pcontext" name="pcontext"></textarea>1
+        <p>内容</p>
+    </div>
+    <div >
+        <input type="text" id="ptype" name="ptype">
+        <p>类型</p>
+    </div>
+    <div >
+        <input type="text" id="ptime" name="ptime">
+        <p>时间</p>
+    </div>
+    <div >
+        <input type="submit" value="登录1111" id="login-btn">
+    </div>
+</form>
+
+<form action="http://121.36.209.202:8080/ssm_web-1.0/find_postById" METHOD="get">
+    <div >
+        <input type="text" id="id" name="id" typeof="int">
+        <p></p>
+    </div>
+    <div >
+        <input type="text" id="end_id" name="end_id"typeof="int">
+        <p></p>
+    </div>
+    <div >
+        <input type="submit" value="登录2222">
+    </div>
+</form>
+
+
+</body>
+<script>
+    let  textarea =  document.getElementById("pcontext");
+    textarea.onblur=function (){
+        let newString = textarea .value.replace(/\n/g, '_@').replace(/\r/g, '_#')
+        newString = newString.replace(/_#_@/g, '<br/>')    // IE7-8
+        newString = newString.replace(/_@/g, '<br/>')      // IE9、FF、chrome
+        newString = newString.replace(/\s/g, '&nbsp;')     // 空格处理
+
+        textarea.innerHTML=newString;
+    }
+
+</script>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.ssm.dao.PostDao">
+    <resultMap id="resultMap" type="Post">
+        <id property="pid" column="pid" javaType="Integer"></id>
+        <result property="pic" column="pic" javaType="String"></result>
+        <result property="uname" column="uname" javaType="String"></result>
+        <result property="ptitle" column="ptitle" javaType="String"></result>
+        <result property="pcontext" column="pcontext" javaType="String"></result>
+        <result property="ptype" column="ptype" javaType="String"></result>
+        <result property="ptime" column="ptime" javaType="String"></result>
+    </resultMap>
+
+    <insert id="insert" parameterType="Post" useGeneratedKeys="true" keyProperty="pid" keyColumn="pid" >
+        insert into users.postinfo(pic,uname,ptitle,pcontext,ptype,ptime)
+                        VALUES (#{pic},#{uname},#{ptitle},#{pcontext},#{ptype},#{ptime});
+
+        <selectKey resultType="Integer" keyProperty="pid" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+
+
+    </insert>
+    <update id="updateByName" parameterType="String" >
+        update users.postinfo set pcontext=#{pcontext} where ptitle=#{ptitle};
+    </update>
+    <select id="selectByName" parameterType="String" resultMap="resultMap">
+        select * from users.postinfo where ptitle=#{ptitle};
+    </select>
+
+    <select id="selectById" parameterType="Integer" resultType="Post">
+        select * from users.postinfo order by pid desc limit #{id},#{end_id};
+    </select>
+</mapper>

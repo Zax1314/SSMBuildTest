@@ -1,0 +1,3 @@
+# Project exclude paths
+/ssm_service/target/
+/ssm_web/target/

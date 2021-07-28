@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.ssm.dao.UserDao">
+    <resultMap id="resultMap" type="User">
+        <id property="uid" column="uid" javaType="Integer"></id>
+        <result property="uname" column="uname" javaType="String"></result>
+        <result property="upwd" column="upwd" javaType="String"></result>
+        <result property="mail" column="mail" javaType="String"></result>
+    </resultMap>
+
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="uid" keyColumn="uid" >
+        insert into users.userinfo(uname,upwd,mail)
+                        VALUES (#{uname},#{upwd},#{mail});
+
+        <selectKey resultType="Integer" keyProperty="uid" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+
+
+    </insert>
+
+    <select id="selectByName" parameterType="String" resultMap="resultMap">
+        select * from users.userinfo where uname=#{uname};
+    </select>
+</mapper>
